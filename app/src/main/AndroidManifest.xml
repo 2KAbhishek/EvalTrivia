@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EvalTrivia">
         <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+        <activity
             android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
