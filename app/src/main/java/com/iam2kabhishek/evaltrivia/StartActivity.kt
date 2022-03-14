@@ -10,13 +10,13 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-        val startButton = findViewById<Button>(R.id.button_start)
+        val startButton = findViewById<Button>(R.id.start_button)
         startButton.setOnClickListener {
             val intent = Intent(this, TriviaActivity::class.java)
             startActivity(intent)
         }
 
-        val aboutButton = findViewById<Button>(R.id.button_about)
+        val aboutButton = findViewById<Button>(R.id.about_button)
         aboutButton.setOnClickListener {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)

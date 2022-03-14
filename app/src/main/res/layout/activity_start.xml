@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_start"
+        android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -29,13 +29,13 @@
         app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <Button
-        android:id="@+id/button_about"
+        android:id="@+id/about_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="About"
-        app:layout_constraintEnd_toEndOf="@+id/button_start"
-        app:layout_constraintStart_toStartOf="@+id/button_start"
-        app:layout_constraintTop_toBottomOf="@+id/button_start" />
+        app:layout_constraintEnd_toEndOf="@+id/start_button"
+        app:layout_constraintStart_toStartOf="@+id/start_button"
+        app:layout_constraintTop_toBottomOf="@+id/start_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
