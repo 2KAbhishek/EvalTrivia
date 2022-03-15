@@ -66,6 +66,7 @@ class TriviaActivity : AppCompatActivity() {
         intent.putExtra("CORRECT", correctAnswers)
         val questionsAttempted = if (expressionIndex == 0) 1 else expressionIndex/2
         intent.putExtra("INCORRECT", questionsAttempted - correctAnswers)
+        finish()
         startActivity(intent)
     }
 
