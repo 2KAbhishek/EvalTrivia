@@ -14,7 +14,7 @@ class TriviaActivity : AppCompatActivity() {
     private var timerCount = 50
     private val expressions: List<Expression> = Maker().generateRandomExpressions
     private var expressionIndex = 0
-    private var score = 0
+    private var correctAnswers = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,15 +63,19 @@ class TriviaActivity : AppCompatActivity() {
 
     private fun resultActivity() {
         val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra("CORRECT", correctAnswers)
+        val questionsAttempted = if (expressionIndex == 0) 1 else expressionIndex/2
+        intent.putExtra("INCORRECT", questionsAttempted - correctAnswers)
         startActivity(intent)
     }
 
     private fun checkAnswer(expr1: String, expr2: String, c: Char) {
         when (c) {
-            '>' -> score = if (Solver.solve(expr1) > Solver.solve(expr2)) score++ else score
-            '=' -> score = if (Solver.solve(expr1) == Solver.solve(expr2)) score++ else score
-            '<' -> score = if (Solver.solve(expr1) < Solver.solve(expr2)) score++ else score
+            '>' -> correctAnswers = if (Solver.solve(expr1) > Solver.solve(expr2)) correctAnswers++ else correctAnswers
+            '=' -> correctAnswers = if (Solver.solve(expr1) == Solver.solve(expr2)) correctAnswers++ else correctAnswers
+            '<' -> correctAnswers = if (Solver.solve(expr1) < Solver.solve(expr2)) correctAnswers++ else correctAnswers
         }
+        
         val exprOneText = findViewById<TextView>(R.id.expr_one_text)
         val exprTwoText = findViewById<TextView>(R.id.expr_two_text)
 
