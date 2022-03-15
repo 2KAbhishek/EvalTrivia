@@ -7,26 +7,26 @@
     tools:context=".TriviaActivity">
 
     <TextView
-        android:id="@+id/eval_one_text"
+        android:id="@+id/expr_one_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(10 / 2) * 5"
         app:layout_constraintBottom_toTopOf="@+id/greater_button"
-        app:layout_constraintEnd_toStartOf="@+id/eval_two_text"
+        app:layout_constraintEnd_toStartOf="@+id/expr_two_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/eval_two_text"
+        android:id="@+id/expr_two_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(4 + 5) * 9"
         app:layout_constraintBottom_toTopOf="@+id/lesser_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/eval_one_text"
+        app:layout_constraintStart_toEndOf="@+id/expr_one_text"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="30"
-        app:layout_constraintEnd_toStartOf="@+id/eval_two_text"
-        app:layout_constraintStart_toEndOf="@+id/eval_one_text"
+        app:layout_constraintEnd_toStartOf="@+id/expr_two_text"
+        app:layout_constraintStart_toEndOf="@+id/expr_one_text"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@ import java.util.*
 
 class Maker {
     private val randomGenerator = Random()
-    val generatedRandomExpressions: List<Expression>
+    val generateRandomExpressions: List<Expression>
         get() {
             val randomExpressions: MutableList<Expression> = ArrayList(NUMBER_OF_EXPRESSIONS)
             for (i in 0 until NUMBER_OF_EXPRESSIONS) {
@@ -37,7 +37,7 @@ class Maker {
     }
 
     companion object {
-        private const val NUMBER_OF_EXPRESSIONS = 10
+        private const val NUMBER_OF_EXPRESSIONS = 1000
         private const val MIN_EXPRESSION_ELEMENTS = 2
         private const val MAX_EXPRESSION_ELEMENTS = 4
         private const val MIN_EXPRESSION_ELEMENT_VALUE = 1
@@ -45,7 +45,7 @@ class Maker {
         @JvmStatic
         fun main(args: Array<String>) {
             val expressionGenerator = Maker()
-            val randomQuestions = expressionGenerator.generatedRandomExpressions
+            val randomQuestions = expressionGenerator.generateRandomExpressions
             for (expression in randomQuestions) {
                 println(expression)
             }
