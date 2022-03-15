@@ -4,16 +4,46 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.widget.Button
 import android.widget.TextView
 import com.iam2kabhishek.evaltrivia.expr.Expression
 import com.iam2kabhishek.evaltrivia.expr.Maker
+import com.iam2kabhishek.evaltrivia.expr.Solver
 
 class TriviaActivity : AppCompatActivity() {
-    var timerCount = 50
+    private var timerCount = 50
+    private val expressions: List<Expression> = Maker().generateRandomExpressions
+    private var expressionIndex = 0
+    private var score = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trivia)
-        val expressions = getExpressions()
+
+        val exprOneText = findViewById<TextView>(R.id.expr_one_text)
+        val exprTwoText = findViewById<TextView>(R.id.expr_two_text)
+
+        val greaterButton = findViewById<Button>(R.id.greater_button)
+        val equalButton = findViewById<Button>(R.id.equal_button)
+        val lesserButton = findViewById<Button>(R.id.lesser_button)
+
+        greaterButton.setOnClickListener{
+            val expr1 = exprOneText.text.toString()
+            val expr2 = exprTwoText.text.toString()
+            checkAnswer(expr1, expr2, '>')
+        }
+
+        equalButton.setOnClickListener{
+            val expr1 = exprOneText.text.toString()
+            val expr2 = exprTwoText.text.toString()
+            checkAnswer(expr1, expr2, '=')
+        }
+
+        lesserButton.setOnClickListener{
+            val expr1 = exprOneText.text.toString()
+            val expr2 = exprTwoText.text.toString()
+            checkAnswer(expr1, expr2, '<')
+        }
         startTimeCounter()
     }
 
