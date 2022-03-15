@@ -66,8 +66,17 @@ class TriviaActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun getExpressions(): List<Expression> {
-        val maker = Maker()
-        return maker.generateRandomExpressions
+    private fun checkAnswer(expr1: String, expr2: String, c: Char) {
+        when (c) {
+            '>' -> score = if (Solver.solve(expr1) > Solver.solve(expr2)) score++ else score
+            '=' -> score = if (Solver.solve(expr1) == Solver.solve(expr2)) score++ else score
+            '<' -> score = if (Solver.solve(expr1) < Solver.solve(expr2)) score++ else score
+        }
+        val exprOneText = findViewById<TextView>(R.id.expr_one_text)
+        val exprTwoText = findViewById<TextView>(R.id.expr_two_text)
+
+        exprOneText.text = expressions[expressionIndex].toString()
+        exprTwoText.text = expressions[expressionIndex + 1].toString()
+        expressionIndex += 2
     }
 }
