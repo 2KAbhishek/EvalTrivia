@@ -11,7 +11,7 @@ import com.iam2kabhishek.evaltrivia.expr.Maker
 import com.iam2kabhishek.evaltrivia.expr.Solver
 
 class TriviaActivity : AppCompatActivity() {
-    private var timerCount = 50
+    private var timerCount = 10
     private val expressions: List<Expression> = Maker().generateRandomExpressions
     private var expressionIndex = 0
     private var correctAnswers = 0
@@ -47,15 +47,46 @@ class TriviaActivity : AppCompatActivity() {
         startTimeCounter()
     }
 
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        val exprOneText = findViewById<TextView>(R.id.expr_one_text).text.toString()
+        val exprTwoText = findViewById<TextView>(R.id.expr_two_text).text.toString()
+        val timerText = findViewById<TextView>(R.id.timer_text).text.toString()
+
+        savedInstanceState.putString("exprOneText", exprOneText)
+        savedInstanceState.putString("exprTwoText", exprTwoText)
+        savedInstanceState.putString("timerText", timerText)
+
+        savedInstanceState.putInt("correctAnswers", correctAnswers)
+        savedInstanceState.putInt("expressionIndex", expressionIndex)
+        savedInstanceState.putInt("timerCount", timerCount)
+
+        super.onSaveInstanceState(savedInstanceState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val exprOneText = findViewById<TextView>(R.id.expr_one_text)
+        val exprTwoText = findViewById<TextView>(R.id.expr_two_text)
+        val timerText = findViewById<TextView>(R.id.timer_text)
+
+        exprOneText.text = savedInstanceState.getString("exprOneText")
+        exprTwoText.text = savedInstanceState.getString("exprTwoText")
+        timerText.text = savedInstanceState.getString("timerText")
+
+        timerCount = savedInstanceState.getInt("timerCount")
+        correctAnswers = savedInstanceState.getInt("correctAnswers")
+        expressionIndex = savedInstanceState.getInt("expressionIndex")
+    }
+
     private fun startTimeCounter() {
         val timerText = findViewById<TextView>(R.id.timer_text)
-        object : CountDownTimer(49999, 1000) {
+        object : CountDownTimer((timerCount * 1000).toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timerText.text = timerCount.toString()
                 timerCount--
             }
             override fun onFinish() {
-                timerText.text = "Game Over!"
+                if (timerCount > 0) return
                 resultActivity()
             }
         }.start()
@@ -64,7 +95,7 @@ class TriviaActivity : AppCompatActivity() {
     private fun resultActivity() {
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("CORRECT", correctAnswers)
-        val questionsAttempted = if (expressionIndex == 0) 1 else expressionIndex/2
+        val questionsAttempted = if (expressionIndex == 0) 1 else expressionIndex / 2
         intent.putExtra("INCORRECT", questionsAttempted - correctAnswers)
         finish()
         startActivity(intent)
