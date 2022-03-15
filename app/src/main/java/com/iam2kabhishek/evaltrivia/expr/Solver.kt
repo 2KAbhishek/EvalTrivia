@@ -2,9 +2,9 @@ package com.iam2kabhishek.evaltrivia.expr
 
 class Solver {
     companion object{
-        fun  String.solve():Double = calc(this)
+        fun  String.calculate():Double = solve(this)
         @JvmStatic
-        fun calc(str: String): Double {
+        fun solve(str: String): Double {
             return object : Any() {
                 var pos = -1
                 var ch = 0
