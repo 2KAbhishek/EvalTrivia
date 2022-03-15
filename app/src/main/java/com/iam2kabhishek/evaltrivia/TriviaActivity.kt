@@ -11,7 +11,7 @@ import com.iam2kabhishek.evaltrivia.expr.Maker
 import com.iam2kabhishek.evaltrivia.expr.Solver
 
 class TriviaActivity : AppCompatActivity() {
-    private var timerCount = 10
+    private var timerCount = 60
     private val expressions: List<Expression> = Maker().generateRandomExpressions
     private var expressionIndex = 0
     private var correctAnswers = 0
@@ -86,8 +86,9 @@ class TriviaActivity : AppCompatActivity() {
                 timerCount--
             }
             override fun onFinish() {
-                if (timerCount > 0) return
-                resultActivity()
+                if (timerCount <= 1) {
+                    resultActivity()
+                }
             }
         }.start()
     }
